@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para mi niña piciosa💙</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    #saludo h1 {
+      font-size: 4rem;
+    }
+
+    #saludo {
+      animation: appear 1.5s linear;
+    }
+
+    .pelota {
+      margin-top: 6rem;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+      background-color: #000;
+      border-radius: 50%;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      animation: bounce 1.5s infinite ease;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(2rem);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes appear {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Estilos compartidos para los articles y forms */
+    .question-article {
+      padding: 1.5rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .question-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .question-form h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-form label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .question-form input[type="text"],
+    .question-form input[type="radio"] {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .question-form button {
+      margin-top: 1rem;
+      background-color: #6b46c1;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+    }
+
+    /* Estilos para las alertas de respuesta incorrecta */
+    .alert-incorrect {
+      color: #f56565;
+      font-weight: bold;
+    }
+
+    /* Estilos específicos para los párrafos */
+    #parrafo_1,
+    #parrafo_2,
+    #parrafo_3 {
+      padding: 2rem 4rem;
+      font-weight: 500;
+      color: #fff;
+      font-size: large;
+      text-wrap: pretty;
+    }
+
+    #parrafo_1 span,
+    #parrafo_2 span,
+    #parrafo_3 span {
+      padding: 1.2rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="juego" class="bg-white w-screen min-h-screen flex flex-col items-center justify-center px-4 bg-purple-200">
+    <h2 class="text-xl font-semibold text-center" id="reto">
+      Responde correctamente las preguntas para desbloquear la carta
+    </h2>
+    <span class="my-4" id="banner">No uses signos de puntuación.
+      <p>
+        Cada respuesta correcta te dará un código, guárdalo para después 😉.
+      </p>
+    </span>
+    <span id="code" class="hidden text-2xl font-bold text-purple-700"></span>
+    <div class="flex flex-col gap-6 my-4">
+      <article id="P1" class="question-article">
+        <h4 class="font-bold text-lg">Pregunta:</h4>
+        <h5>Te quiero un montón como...</h5>
+        <label for="pregunta_1" id="labelP1" class="alert-incorrect hidden">Respuesta incorrecta</label>
+        <form class="question-form" id="formP1">
+          <input type="text" id="pregunta_1" />
+          <button id="btnP1">Siguiente</button>
+        </form>
+      </article>
+      <article id="P2" class="question-article hidden">
+        <h4 class="font-bold text-lg">Pregunta:</h4>
+        <h5>Excusa que saqué para salirme de clase para ir a verte:</h5>
+        <label id="labelP2" class="alert-incorrect hidden">Respuesta incorrecta</label>
+        <form class="question-form" id="formP2">
+          <label>
+            <input type="radio" name="pregunta_2" value="A" />
+            A. Mi mamá tuvo un accidente
+          </label>
+          <label>
+            <input type="radio" name="pregunta_2" value="B" />
+            B. Iban a hacer unos arreglos en la casa
+          </label>
+          <label>
+            <input type="radio" name="pregunta_2" value="C" />
+            C. Mi hermana se enfermó y debo ir por ella al colegio
+          </label>
+          <label>
+            <input type="radio" name="pregunta_2" value="D" />
+            D. Tengo una cita médica
+          </label>
+          <div class="flex flex-col gap-2">
+            <button id="btnP2">Siguiente</button>
+          </div>
+        </form>
+      </article>
+      <article id="P3" class="question-article hidden">
+        <h4 class="font-bold text-lg">Pregunta:</h4>
+        <h5>
+          La comida que ordenamos la segunda vez que nos vimos
+          (recomendación: buscar como se escribe en Google):
+        </h5>
+        <label for="pregunta_3" id="labelP3" class="alert-incorrect hidden">Respuesta incorrecta</label>
+        <form class="question-form" id="formP3">
+          <input type="text" id="pregunta_3" />
+          <button id="btnP3">Siguiente</button>
+        </form>
+      </article>
+      <article id="P4" class="question-article hidden">
+        <h4 class="font-bold text-lg">Pregunta:</h4>
+        <h5>Nos vamos a robar un ____ del Cauca:</h5>
+        <label for="pregunta_4" id="labelP4" class="alert-incorrect hidden">Respuesta incorrecta</label>
+        <form class="question-form" id="formP4">
+          <input type="text" id="pregunta_4" />
+          <button id="btnP4">Siguiente</button>
+        </form>
+      </article>
+      <article id="P5" class="question-article hidden">
+        <h4 class="font-bold text-lg">Pregunta:</h4>
+        <h5>
+          Frase icónica utilizada en el pergamino (y perdemos el control
+          pero solo...):
+        </h5>
+        <label for="pregunta_5" id="labelP5" class="alert-incorrect hidden">Respuesta incorrecta</label>
+        <form class="question-form" id="formP5">
+          <input type="text" id="pregunta_5" />
+          <button id="btnP5">Siguiente</button>
+        </form>
+      </article>
+      <article id="P6" class="question-article hidden">
+        <h5>Ingresa el código para desbloquear la carta:</h5>
+        <form class="question-form" id="formP6">
+          <input type="text" id="pregunta_6" />
+          <button id="btnP6">Desbloquear</button>
+        </form>
+      </article>
+    </div>
+  </div>
+  <main>
+    <section id="saludo" class="bg-white min-h-screen flex flex-col items-center justify-center">
+      <h1 class="font-bold p-6">Hola Sara💙</h1>
+      <h2 class="text-2xl">porque nunca es un mal momento para decirte algo lindo...</h2>
+      <span class="px-6 py-3 my-3">
+        Y aunque no lo hice a mano, quise hacerlo en algo que sea más
+        duradero.
+      </span>
+      <a href="#parrafo_1" class="pelota"> ↓ </a>
+    </section>
+    <section id="parrafo_1" class="bg-red-300 min-h-screen flex flex-col items-center justify-center">
+      Ya son 3 meses a tu lado:
+      <div class="flex flex-wrap gap-3 p-6">
+        <p id="semanas">0</p>
+        semanas,
+        <p id="dias">0</p>
+        días,
+        <p id="horas">0</p>
+        horas,
+        <p id="minutos">0</p>
+        minutos,
+        <p id="segundos">0</p>
+        segundos
+      </div>
+      desde que comenzamos a reír y soñar juntos. Tres meses en los que
+      he encontrado en ti un apoyo, un amor sincero y una felicidad que jamás pensé conocer.
+      Quiero seguir creando recuerdos contigo y amarte cada día más....
+      <span>
+        Ha sido el mejor comienzo de una historia que quiero seguir escribiendo contigo.
+        Cada día descubro más razones para amarte y admirarte,
+        y espero que estos meses solo sean el inicio de una vida llena de amor y aventuras juntos.
+        Te adoro, y gracias por ser mi compañera en esta hermosa historia.
+      </span>
+      <span>
+        Todo es mejor cuando estás cerca, y no hay lugar en el mundo en el que prefiera estar que a tu lado.
+        Te amo, mi niña, por ser exactamente como eres.
+      </span>
+
+      <a href="#parrafo_2" class="pelota"> ↓ </a>
+    </section>
+    <section id="parrafo_2" class="bg-yellow-300 min-h-screen flex flex-col items-center justify-center">
+      Me siento muy orgulloso al ver lo mucho que te esfuerzas por tus estudios, por tu familia,
+      por nosotros, y sobre todo por ti misma ¿y sabes que es lo mejor de todo?
+      eres la mejor en todo lo que haces... Te admiro muchisimoooo
+      <span>
+        no sé cómo lo haces, pero siempre logras sacarme una sonrisa.
+        Me siento en casa contigo, y eso es algo que nunca había sentido antes.
+        Me encanta que eres tan auténtica y que cada día contigo sea una aventura.
+        ¡Eres increíble!
+
+      </span>
+      <span>
+        Me sorprende ver todo lo que aprendes, logras, alcanzas y te
+        esfuerzas. Y aun así, a pesar de tu cansancio, siempre tienes esa
+        sonrisa que refleja lo lindo de tu ser, y el amor que cada día
+        me demuestras.
+      </span>
+
+      <a href="#parrafo_3" class="pelota"> ↓ </a>
+    </section>
+    <section id="parrafo_3" class="bg-purple-400 min-h-screen flex flex-col items-center justify-center">
+      A veces pienso en cómo llegaste a mi vida y cómo, sin darme cuenta, poco a poco te convertiste en alguien esencial
+      para mí. Nunca imaginé que podría conectar tan profundamente con alguien, pero contigo todo es diferente. No sé si
+      alguna vez te lo he dicho así, pero me haces sentir cosas que no sabía que existían.
+
+      Eres más que una novia para mí; eres mi mejor amiga, mi apoyo en los días difíciles, y la primera persona en la
+      que pienso cuando algo bueno o malo me pasa. Me encanta poder ser yo mismo contigo, sin reservas, y saber que me
+      aceptas tal y como soy. Me encanta cómo eres, con tus risas, tus ocurrencias y esa forma de ver el mundo tan
+      única. A veces solo me quedo observándote, en silencio, y pienso en lo afortunado que soy de haberte encontrado.
+
+      Quiero que sepas que eres increíble, que te admiro profundamente y que, aunque no siempre lo diga, siento que
+      tengo al mejor ser humano a mi lado. Cuando estoy contigo, el mundo se siente como un lugar mejor y me doy cuenta
+      de que no cambiaría nada de lo que tenemos. Te amo, Sara, más de lo que las palabras pueden explicar, y quiero
+      seguir compartiendo cada momento, cada risa y cada locura a tu lado.
+
+      <span>
+        Gracias por ser tú, por estar aquí y por hacerme sentir tan feliz y completo. No sé qué venga en el futuro, pero
+        si estás en él, sé que será increíble.
+      </span>
+      <h3 class="text-3xl">Te amo con todo mi ser y más. 💙</h3>
+    </section>
+  </main>
+  <script>
+    const main = document.querySelector("main");
+    main.style.display = "none";
+    let letras_codigo = ["060", "820", "24", "TS", "2109"];
+    const semanas = document.getElementById("semanas");
+    const dias = document.getElementById("dias");
+    const horas = document.getElementById("horas");
+    const minutos = document.getElementById("minutos");
+    const segundos = document.getElementById("segundos");
+    const p1 = document.querySelector("#P1");
+    const p2 = document.querySelector("#P2");
+    const p3 = document.querySelector("#P3");
+    const p4 = document.querySelector("#P4");
+    const p5 = document.querySelector("#P5");
+    const p6 = document.querySelector("#P6");
+    const labelP1 = document.querySelector("#labelP1");
+    const labelP2 = document.querySelector("#labelP2");
+    const labelP3 = document.querySelector("#labelP3");
+    const labelP4 = document.querySelector("#labelP4");
+    const labelP5 = document.querySelector("#labelP5");
+    const pregunta_1 = document.getElementById("pregunta_1");
+    const pregunta_2 = document.querySelector("#pregunta_2");
+    const pregunta_3 = document.querySelector("#pregunta_3");
+    const pregunta_4 = document.querySelector("#pregunta_4");
+    const pregunta_5 = document.querySelector("#pregunta_5");
+    const pregunta_6 = document.querySelector("#pregunta_6");
+    const formP1 = document.getElementById("formP1");
+    const formP2 = document.getElementById("formP2");
+    const formP3 = document.getElementById("formP3");
+    const formP4 = document.getElementById("formP4");
+    const formP5 = document.getElementById("formP5");
+    const formP6 = document.getElementById("formP6");
+    const code = document.getElementById("code");
+    const banner = document.getElementById("banner");
+    const forms = [formP1, formP2, formP3, formP4, formP5, formP6];
+    forms.map((f) => {
+      f.setAttribute("autocomplete", "off");
+    })
+    formP1.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log(pregunta_1.value.toLowerCase());
+
+      if (pregunta_1.value.toLowerCase() === "los venezolanos en colombia") {
+        code.classList.remove("hidden");
+        code.innerHTML = `Código: ${letras_codigo[0]}`;
+        labelP1.classList.add("hidden");
+        setTimeout(() => {
+          P1.classList.add("hidden");
+          P2.classList.remove("hidden");
+          code.classList.add("hidden");
+        }, 2500);
+      } else {
+        labelP1.classList.remove("hidden");
+      }
+    });
+
+    formP2.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const respuesta = document.querySelector(
+        'input[name="pregunta_2"]:checked'
+      );
+
+      if (respuesta && respuesta.value === "C") {
+        code.classList.remove("hidden");
+        code.innerHTML = `Código: ${letras_codigo[1]}`;
+        labelP2.classList.add("hidden");
+        setTimeout(() => {
+          P2.classList.add("hidden");
+          P3.classList.remove("hidden");
+          code.classList.add("hidden");
+        }, 2500);
+      } else {
+        labelP2.classList.remove("hidden");
+      }
+    });
+
+    formP3.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (pregunta_3.value.toLowerCase() === "picanuggys") {
+        code.classList.remove("hidden");
+        code.innerHTML = `Código: ${letras_codigo[2]}`;
+        labelP3.classList.add("hidden");
+        setTimeout(() => {
+          P3.classList.add("hidden");
+          P4.classList.remove("hidden");
+          code.classList.add("hidden");
+        }, 2500);
+      } else {
+        labelP3.classList.remove("hidden");
+      }
+    });
+
+    formP4.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (pregunta_4.value.toLowerCase() === "hipopotamo") {
+        code.classList.remove("hidden");
+        code.innerHTML = `Código: ${letras_codigo[3]}`;
+        labelP4.classList.add("hidden");
+        setTimeout(() => {
+          P4.classList.add("hidden");
+          P5.classList.remove("hidden");
+          code.classList.add("hidden");
+        }, 2500);
+      } else {
+        labelP4.classList.remove("hidden");
+      }
+    });
+
+    formP5.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (pregunta_5.value.toLowerCase() === "uno poquito") {
+        code.classList.remove("hidden");
+        code.innerHTML = `Código: ${letras_codigo[4]}`;
+        labelP5.classList.add("hidden");
+        setTimeout(() => {
+          P5.classList.add("hidden");
+          document.getElementById("reto").innerHTML = "¡Felicidades!";
+          banner.innerHTML = `
+        <p>Ahora, ingresa todos los códigos juntos, más el segundo dígito de cada código. Por ejemplo, si el primer código es 345, el segundo 164 y el tercero ABC, al final escribe 345164ABC<strong>46B</strong>.</p>
+        <span>Escribe las letras en mayúsculas</span>
+
+      `;
+          code.classList.add("hidden");
+          P6.classList.remove("hidden");
+        }, 2500);
+      } else {
+        labelP5.classList.remove("hidden");
+      }
+    });
+
+    formP6.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (pregunta_6.value === "06082024TS2109624S1") {
+        document.getElementById("juego").style.display = "none";
+        main.style.display = "block";
+        p6.classList.add("hidden");
+      } else {
+        alert("Código incorrecto. Inténtalo de nuevo.");
+      }
+    });
+
+    function animateCounter(element, start, end, duration) {
+  let current = start;
+  const range = end - start;
+  const increment = Math.ceil(range / (duration / 50)); // Ajusta el incremento para rangos grandes
+  const stepTime = 50; // Intervalo fijo
+
+  const timer = setInterval(() => {
+    current += increment;
+    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+      current = end; // Asegura que el valor final sea exacto
+      clearInterval(timer);
+    }
+    element.textContent = current;
+  }, stepTime);
+}
+
+    const section = document.getElementById("parrafo_1");
+    let animationStarted = false; // Para evitar que la animación se ejecute varias veces
+
+    // Configuramos el IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animationStarted) {
+            // Ejecutar animación cuando la sección sea visible
+            animateCounter(semanas, 0, 12, 1500);
+            animateCounter(dias, 0, 91, 1650);
+            animateCounter(horas, 1403, 2191, 1750);
+            animateCounter(minutos, 87700, 131500, 1850);
+            animateCounter(segundos, 5270100, 7890048, 1950);
+            animationStarted = true; // Asegurar que la animación solo se ejecute una vez
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Ejecutar cuando el 10% de la sección esté visible
+      }
+    );
+
+    // Observar la sección
+    observer.observe(section);
+  </script>
+</body>
+
+</html>
